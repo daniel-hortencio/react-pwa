@@ -32,7 +32,7 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     setTimeout(() => {
       const { outerHeight, innerHeight } = window;
 
@@ -44,29 +44,27 @@ function App() {
         setIsPWA(true);
       }
     }, 2000);
-  }, []);
+  }, []); */
 
   return (
     <div className="App" ref={elementRef}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {!isPWA && (
-          <button
-            onClick={onInstall}
-            id="#install"
-            style={{
-              background: "white",
-              color: "#252525",
-              fontWeight: 500,
-              fontSize: "1.25rem",
-              padding: "1rem",
-              borderRadius: ".25rem",
-            }}
-          >
-            Instale no seu celular
-          </button>
-        )}
+        <button
+          onClick={onInstall}
+          id="#install"
+          style={{
+            background: "white",
+            color: "#252525",
+            fontWeight: 500,
+            fontSize: "1.25rem",
+            padding: "1rem",
+            borderRadius: ".25rem",
+          }}
+        >
+          Instale no seu celular
+        </button>
       </header>
     </div>
   );
