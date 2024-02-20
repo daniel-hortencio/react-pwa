@@ -78,7 +78,28 @@ self.addEventListener("message", (event) => {
   }
 });
 
+// Any other custom service worker logic can go here.
+
+if ("serviceWorker" in navigator) {
+  console.log("Entrou aqui");
+  navigator.serviceWorker
+    .register("/serviceworker.js", { scope: "/" })
+    .then((registration) => {
+      registration.unregister().then((boolean) => {});
+    })
+    .catch((error) => {});
+  // Befor install prompt start
+  window.addEventListener("beforeinstallprompt", (event: any) => {
+    event.preventDefault();
+    let installDiv = document.getElementById("divInstallApp");
+    if (installDiv) {
+      installDiv.addEventListener("click", () => {
+        event.prompt();
+      });
+    }
+  });
+  // Befor install prompt end
+}
+
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", () => self.clients.claim());
-
-// Any other custom service worker logic can go here.
