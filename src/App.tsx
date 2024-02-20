@@ -38,7 +38,7 @@ function App() {
 
       console.log({ outerHeight, innerHeight });
 
-      if (outerHeight - innerHeight > 50) {
+      if (outerHeight - innerHeight > 40) {
         setIsPWA(false);
       } else {
         setIsPWA(true);
