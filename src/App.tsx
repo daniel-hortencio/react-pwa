@@ -35,22 +35,22 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {isAppInstalled && (
-          <button
-            onClick={onInstall}
-            id="#install"
-            style={{
-              background: "white",
-              color: "#252525",
-              fontWeight: 500,
-              fontSize: "1.25rem",
-              padding: "1rem",
-              borderRadius: ".25rem",
-            }}
-          >
-            Instale no seu celular
-          </button>
-        )}
+        {/* {!isAppInstalled && ( */}
+        <button
+          onClick={onInstall}
+          id="#install"
+          style={{
+            background: "white",
+            color: "#252525",
+            fontWeight: 500,
+            fontSize: "1.25rem",
+            padding: "1rem",
+            borderRadius: ".25rem",
+          }}
+        >
+          Instale no seu celular
+        </button>
+        {/*  )} */}
       </header>
     </div>
   );
