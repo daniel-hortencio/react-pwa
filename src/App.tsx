@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const handleInstallClick = () => {
-    // Verificar se o navegador suporta a instalação de PWA
+    /* // Verificar se o navegador suporta a instalação de PWA
     if ("serviceWorker" in navigator && "InstallEvent" in window) {
       // Verificar se já não está instalado
       if (!window.matchMedia("(display-mode: standalone)").matches) {
@@ -15,6 +15,27 @@ function App() {
       }
     } else {
       alert("Seu navegador não suporta a instalação de Progressive Web Apps.");
+    } */
+
+    if ("serviceWorker" in navigator) {
+      console.log("entrou aqui");
+      navigator.serviceWorker
+        .register("/service-worker.js", { scope: "/" })
+        .then((registration) => {
+          registration.unregister().then((boolean) => {});
+        })
+        .catch((error: any) => {
+          console.log({ error });
+        });
+      // Befor install prompt start
+      window.addEventListener("beforeinstallprompt", (event: any) => {
+        event.preventDefault();
+
+        console.log({ event });
+
+        event.prompt();
+      });
+      // Befor install prompt end
     }
   };
 
@@ -24,13 +45,14 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
 
         <button
+          id="divInstallApp"
           style={{
             background: "white",
             color: "#252525",
             fontWeight: 500,
             fontSize: "1.25rem",
             padding: "1rem",
-            borderRadius: ".5rem",
+            borderRadius: ".25rem",
           }}
           onClick={handleInstallClick}
         >
