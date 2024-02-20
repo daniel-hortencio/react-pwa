@@ -81,7 +81,6 @@ self.addEventListener("message", (event) => {
 // Any other custom service worker logic can go here.
 
 if ("serviceWorker" in navigator) {
-  console.log("Entrou aqui");
   navigator.serviceWorker
     .register("/serviceworker.js", { scope: "/" })
     .then((registration) => {

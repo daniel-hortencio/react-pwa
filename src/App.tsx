@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
   const [installPrompt, setInstallPrompt] = useState<any>(null);
   const [isAppInstalled, setIsAppInstalled] = useState(false);
+  const [isPWA, setIsPWA] = useState(true);
+  const elementRef = useRef<HTMLDivElement | null>(null);
 
   function disableInAppInstallPrompt() {
     setInstallPrompt(null);
@@ -30,27 +32,41 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      const { outerHeight, innerHeight } = window;
+
+      console.log({ outerHeight, innerHeight });
+
+      if (outerHeight - innerHeight > 50) {
+        setIsPWA(false);
+      } else {
+        setIsPWA(true);
+      }
+    }, 2000);
+  }, []);
+
   return (
-    <div className="App">
+    <div className="App" ref={elementRef}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {/* {!isAppInstalled && ( */}
-        <button
-          onClick={onInstall}
-          id="#install"
-          style={{
-            background: "white",
-            color: "#252525",
-            fontWeight: 500,
-            fontSize: "1.25rem",
-            padding: "1rem",
-            borderRadius: ".25rem",
-          }}
-        >
-          Instale no seu celular
-        </button>
-        {/*  )} */}
+        {!isPWA && (
+          <button
+            onClick={onInstall}
+            id="#install"
+            style={{
+              background: "white",
+              color: "#252525",
+              fontWeight: 500,
+              fontSize: "1.25rem",
+              padding: "1rem",
+              borderRadius: ".25rem",
+            }}
+          >
+            Instale no seu celular
+          </button>
+        )}
       </header>
     </div>
   );
